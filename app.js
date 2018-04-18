@@ -19,10 +19,11 @@ const user = require('./router/user');
 
 // Load passport config
 require('./config/passport')(passport);
-
+// DB config
+const db = require('./config/database')
 // mnogoose connect
 
-mongoose.connect('mongodb://localhost:27017/NodeProject')
+mongoose.connect(db.mongoURI)
     .then(() => console.log('Mongoose Connected!'))
     .catch(err => console.log('Error', err))
 
@@ -90,7 +91,7 @@ app.use('/user',user);
 
 
 // server port setup
-
+const port  =  process.env.PORT || 3000
 app.listen(3000, () => {
-    console.log(`Server is start in port ${3000}`)
+    console.log(`Server is start in port ${port}`)
 });
